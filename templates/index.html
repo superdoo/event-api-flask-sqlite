@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Latest News</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+            background-color: #f8f9fa;
+        }
+        .news-article {
+            background: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        .news-article h2 {
+            margin-top: 0;
+        }
+        .news-article a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+        .news-article a:hover {
+            text-decoration: underline;
+        }
+        .meta {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .thumbnail {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Latest News</h1>
+
+    {% for article in news %}
+    <div class="news-article">
+        <h2>
+            <a href="{{ article[6] or '#' }}" target="_blank">
+                {{ article[1] or "No Title" }}
+            </a>
+        </h2>
+        <p class="meta">
+            By {{ article[3] or "Unknown" }} |
+            {{ article[4] or "No Source" }} |
+            {{ article[5][:10] if article[5] else "No Date" }}
+        </p>
+        <p>{{ article[2] or "No summary available." }}</p>
+        {% if article[7] %}
+            <img src="{{ article[7] }}" alt="Image" class="thumbnail">
+        {% endif %}
+    </div>
+    {% endfor %}
+</body>
+</html>
